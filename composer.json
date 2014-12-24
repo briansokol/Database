@@ -1,0 +1,24 @@
+{
+    "name": "briansokol/Csv",
+    "description": "A wrapper for PDO that resembles the Zend Framework 1.x database library. PHP 5.3+",
+    "type": "library",
+    "keywords": ["Database", "PDO"],
+    "license": "MIT",
+    "homepage": "https://github.com/briansokol/Database",
+    "authors": [
+        {
+            "name": "Brian Sokol",
+            "email": "Brian.Sokol@gmail.com",
+            "homepage": "http://sokology.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "briansokol\\Database": "src/"
+        }
+    }
+}
