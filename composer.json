@@ -1,5 +1,5 @@
 {
-    "name": "briansokol/Csv",
+    "name": "briansokol/Database",
     "description": "A wrapper for PDO that resembles the Zend Framework 1.x database library. PHP 5.3+",
     "type": "library",
     "keywords": ["Database", "PDO"],
