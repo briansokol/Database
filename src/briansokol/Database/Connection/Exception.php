@@ -3,6 +3,6 @@
 namespace briansokol\Database\Connection;
 
 
-class NoConnectionException extends \Exception{
+class Exception extends \Exception{
 
 }
