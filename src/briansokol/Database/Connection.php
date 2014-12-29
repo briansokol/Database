@@ -6,7 +6,7 @@ use \briansokol\Database\Connection\NoConnectionException;
 
 class Connection {
 
-	protected $conn;
+	protected $conn = false;
 	protected $connInfo = array();
 	protected $debug = FALSE;
 	protected $lastInsert = null;
@@ -16,7 +16,6 @@ class Connection {
 
 
 	public function __construct($host, $user, $pass, $db, $charset = 'utf8') {
-		$this->conn = false;
 		$this->setCredentials($host, $user, $pass, $db, $charset);
 	}
 
@@ -48,7 +47,7 @@ class Connection {
 	}
 
 	public function query($sql, $params = null) {
-		if (!$this->conn) {
+		if ($this->conn === false) {
 			throw new NoConnectionException("Database connection has not been established");
 		}
 		
@@ -72,7 +71,7 @@ class Connection {
 	}
 
 	public function insert($table, $data, $onDuplicateData = null) {
-		if (!$this->conn) {
+		if ($this->conn === false) {
 			throw new NoConnectionException("Database connection has not been established");
 		}
 	
@@ -122,7 +121,7 @@ class Connection {
 	}
 
 	public function update($table, $data, $where = NULL) {
-		if (!$this->conn) {
+		if ($this->conn === false) {
 			throw new NoConnectionException("Database connection has not been established");
 		}
 	
