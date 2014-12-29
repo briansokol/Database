@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Connection;
+namespace briansokol\Database\Connection;
 
 
 class Exception extends \Exception{

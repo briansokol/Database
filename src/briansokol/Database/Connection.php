@@ -1,8 +1,6 @@
 <?php
 
-namespace Database;
-
-require_once('Expression.php');
+namespace briansokol\Database;
 
 class Connection {
 

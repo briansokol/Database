@@ -1,6 +1,6 @@
 <?php
 
-namespace Database;
+namespace briansokol\Database;
 
 class Expression {
 
