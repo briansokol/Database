@@ -2,9 +2,9 @@
 
 namespace briansokol\Database;
 
-class Connection {
+use \briansokol\Database\Connection\NoConnectionException;
 
-	use \briansokol\Database\Connection\NoConnectionException;
+class Connection {
 
 	protected $conn;
 	protected $connInfo = array();
