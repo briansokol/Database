@@ -4,6 +4,8 @@ namespace briansokol\Database;
 
 class Connection {
 
+	use \briansokol\Database\Connection\NoConnectionException;
+
 	protected $conn;
 	protected $connInfo = array();
 	protected $debug = FALSE;
@@ -14,6 +16,7 @@ class Connection {
 
 
 	public function __construct($host, $user, $pass, $db, $charset = 'utf8') {
+		$this->conn = false;
 		$this->setCredentials($host, $user, $pass, $db, $charset);
 	}
 
@@ -45,6 +48,10 @@ class Connection {
 	}
 
 	public function query($sql, $params = null) {
+		if (!$this->conn) {
+			throw new NoConnectionException("Database connection has not been established");
+		}
+		
 		if ($this->debug == false || !strncasecmp("SELECT", trim($sql), 6)) {
 			if (is_array($params)) {
 				$stmt = $this->conn->prepare($sql);
@@ -65,6 +72,10 @@ class Connection {
 	}
 
 	public function insert($table, $data, $onDuplicateData = null) {
+		if (!$this->conn) {
+			throw new NoConnectionException("Database connection has not been established");
+		}
+	
 		if ($this->debug == TRUE) {
 			return false;
 		}
@@ -111,6 +122,10 @@ class Connection {
 	}
 
 	public function update($table, $data, $where = NULL) {
+		if (!$this->conn) {
+			throw new NoConnectionException("Database connection has not been established");
+		}
+	
 		if ($this->debug == TRUE) {
 			return false;
 		}
@@ -183,5 +198,3 @@ class Connection {
 		return $this->conn->quote($string);
 	}
 }
-
-?>
