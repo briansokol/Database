@@ -15,17 +15,18 @@ class Connection {
 	protected $lastUnpreparedQuery = "";
 
 
-	public function __construct($host, $user, $pass, $db, $charset = 'utf8') {
-		$this->setCredentials($host, $user, $pass, $db, $charset);
+	public function __construct($host, $user, $pass, $db, $port = '3306', $charset = 'utf8') {
+		$this->setCredentials($host, $user, $pass, $db, $port, $charset);
 	}
 
-	public function setCredentials($host, $user, $pass, $db, $charset = 'utf8') {
+	public function setCredentials($host, $user, $pass, $db, $port = '3306', $charset = 'utf8') {
 		if (!empty($host) && !empty($user) && !empty($pass) && !empty($db)) {
 			$this->connInfo['hostname'] = $host;
 			$this->connInfo['database'] = $db;
 			$this->connInfo['username'] = $user;
 			$this->connInfo['password'] = $pass;
-			$this->connInfo['charset'] = $charset;
+			$this->connInfo['port']     = $port;
+			$this->connInfo['charset']  = $charset;
 			$this->readyToConnect = true;
 		} else {
 			$this->readyToConnect = false;
@@ -38,7 +39,13 @@ class Connection {
 
 	public function connect() {
 		if ($this->isReadyToConnect()) {
-			$this->conn = new \PDO('mysql:host='.$this->connInfo['hostname'].';dbname='.$this->connInfo['database'].';charset='.$this->connInfo['charset'], $this->connInfo['username'], $this->connInfo['password']);
+			$this->conn = new \PDO(
+				'mysql:host='.$this->connInfo['hostname']
+				.';port='.$this->connInfo['port']
+				.';dbname='.$this->connInfo['database']
+				.';charset='.$this->connInfo['charset'],
+				$this->connInfo['username'],
+				$this->connInfo['password']);
 			$this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			return true;
 		} else {
